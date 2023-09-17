@@ -1,0 +1,7 @@
+{
+  "name": "tempowaiter-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
