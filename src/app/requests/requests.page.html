@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tempo Waiter
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-card class="card" *ngFor="let item of clientRequests"
+     [ngClass]="{
+      'accepted': item.status === 'accepted',
+      'pending': item.status === 'pending',
+      }">
+      <ion-card-header>
+        <ion-card-title>
+          <div class="content">
+            <div class="tile-header">
+              <div class="icon" [ngClass]="item.type"></div>
+              <span class="title">{{item.tableNumber}}</span>
+            </div>
+            <div class="tile-subheader">
+              <span class="duration">{{calculateRequestDuration(item.requestStart)}}</span>
+              <span class="start">{{formatDate(item.requestStart)}}</span>
+            </div>
+          </div>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div *ngIf="item.status === 'accepted'" (click)="setRequestState(item, 'accepted')" class="action-button"><span class="label">Zakończ</span></div>
+        <div *ngIf="item.status === 'pending'" (click)="setRequestState(item, 'pending')" class="action-button"><span class="label">Akceptuj</span></div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
